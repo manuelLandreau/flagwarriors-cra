@@ -5,38 +5,39 @@ import Game from '../Game';
  */
 export abstract class Warrior extends Phaser.Sprite {
 
-  constructor(game: Game,
-                        x: number,
-                        y: number,
-                        key: string,
-                        frame: number) {
-    super(game, x, y, key, frame);
+    protected constructor(game: Game,
+                          x: number,
+                          y: number,
+                          key: string,
+                          frame: number) {
+        super(game, x, y, key, frame);
 
-    this.physics();
-    this.game.world.add(this);
-  }
-  /**
-   * Make object dead.
-   */
-  // die() {
-  //   this.alive = false;
-  // }
+        this.physics();
+        this.game.world.add(this);
+    }
 
-  /**
-   * Resurrect object.
-   */
-  // respawn(x, y) {
-  //   this.body.x = this.x;
-  //   this.body.y = this.y;
-  //   this.alive = true;
-  //   this.visible = true;
-  // }
+    /**
+     * Make object dead.
+     */
+    // die() {
+    //   this.alive = false;
+    // }
 
-  /**
-   * Setup object physics.
-   */
-  private physics() {
-    this.anchor.set(0.5);
-    this.game.physics.arcade.enable(this);
-  }
+    /**
+     * Resurrect object.
+     */
+    // respawn(x, y) {
+    //   this.body.x = this.x;
+    //   this.body.y = this.y;
+    //   this.alive = true;
+    //   this.visible = true;
+    // }
+
+    /**
+     * Setup object physics.
+     */
+    private physics() {
+        this.anchor.set(0.5);
+        this.game.physics.arcade.enable(this);
+    }
 }

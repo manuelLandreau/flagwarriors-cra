@@ -52,7 +52,7 @@ export const lang = {
         YES: 'Yes',
         NO: 'No'
     },
-    
+
     es: {
         LOADING: 'Cargando...',
         LANGUAGE: 'Idioma',

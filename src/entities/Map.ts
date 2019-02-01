@@ -51,15 +51,15 @@ export class Map {
     }
 
     buildWall() {
-        store.tileGroup.forEach(tile => tile.events.onInputOver.add((tile) => {
+        store.tileGroup.forEach(ti => ti.events.onInputOver.add(tile => {
             if (store.wallSwitch && store.wallCount > 13) {
                 store.wallButton.kill();
                 GameState.readyCheck(this.game);
                 store.wallSwitch = false;
-                store.tileGroup.forEach(tile => tile.alpha = 0);
+                store.tileGroup.forEach(t => t.alpha = 0);
             }
-            if (store.wallCount < 14 && this.game.input.activePointer.isDown && store.wallSwitch == true) {
-                if (tile.walled == false && tile.y > 384 && tile.y < 752) {
+            if (store.wallCount < 14 && this.game.input.activePointer.isDown && store.wallSwitch === true) {
+                if (tile.walled === false && tile.y > 384 && tile.y < 752) {
                     store['walle' + store.wallCount] = store.wallGroup.getFirstExists(false);
                     store['walle' + store.wallCount].name = store.wallCount;
                     store['walle' + store.wallCount].reset(tile.x, tile.y);

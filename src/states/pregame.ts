@@ -1,4 +1,4 @@
-import { State } from '../interfaces/state';
+import {State} from '../interfaces/state';
 import {store} from '../config/store';
 import {lang} from '../config/lang';
 import {socket} from '../utils/socket-handler';

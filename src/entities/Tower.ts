@@ -3,7 +3,7 @@ import {Warrior} from './Warrior';
 import {store} from '../config/store';
 import {socket} from '../utils/socket-handler';
 
-let {gameId} = store;
+const {gameId} = store;
 
 /**
  * Tower class.
@@ -35,8 +35,9 @@ export class Tower extends Warrior {
                 if (ennemy.alive && game.physics.arcade.distanceBetween(this, ennemy) < 150
                     || game.physics.arcade.distanceBetween(this, ennemy) < -150) {
                     const canon = game.add.audio('canon');
-                    if (store.sound)
+                    if (store.sound) {
                         canon.play();
+                    }
                     const arrow = store.arrows.getFirstExists(false);
                     arrow.reset(this.x, this.y);
                     game.physics.arcade.enable(arrow);
@@ -44,18 +45,20 @@ export class Tower extends Warrior {
                     arrow.body.onCollide.add(() => {
                         canon.stop();
                         const explosion = game.add.audio('explosion');
-                        if (store.sound)
+                        if (store.sound) {
                             explosion.play();
+                        }
                         const kaboom = store.explosions.getFirstExists(false);
                         kaboom.reset(ennemy.body.x, ennemy.body.y);
                         kaboom.alpha = 0.7;
                         kaboom.play('kaboom', 30, false, true);
-                        if (this.ennemies == ennemies)
+                        if (this.ennemies === ennemies) {
                             socket.emit('attack', {
                                 name: ennemy.name,
                                 damage: game.rnd.integerInRange(8, 15),
                                 gameId: gameId
                             });
+                        }
                         arrow.kill();
                     });
                     arrow.rotation = game.physics.arcade.angleToXY(arrow, ennemy.x, ennemy.y) + 1.6;

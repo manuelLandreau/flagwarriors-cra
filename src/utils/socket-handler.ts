@@ -44,7 +44,7 @@ export function readyAction(readyButton) {
     }
 }
 
-socket.on('ready', (data) => {
+socket.on('ready', data => {
     console.log('ready');
     ennemyData = data;
     if (store.readySwitch) {
@@ -52,11 +52,13 @@ socket.on('ready', (data) => {
         ennemyData = null;
     }
 
-    if (game.waitText1)
+    if (game.waitText1) {
         game.waitText1.destroy();
+    }
 
-    if (game.waitText2)
+    if (game.waitText2) {
         game.waitText2.destroy();
+    }
 
     store.gameOn = true;
 });
@@ -89,29 +91,23 @@ export function addEnnemies(data) {
         store.map.setObstacle(480 - wall.x, 800 - wall.y);
     });
 
-    socket.on('is_moving', function (data) {
-        store['ennemy' + data.name].newPosX = Math.abs(480 - data.nextx);
-        store['ennemy' + data.name].newPosY = Math.abs(800 - data.nexty);
+    socket.on('is_moving', d => {
+        store['ennemy' + d.name].newPosX = Math.abs(480 - d.nextx);
+        store['ennemy' + d.name].newPosY = Math.abs(800 - d.nexty);
     });
 
-    socket.on('set_obstacle', function (data) {
-        store.map.caracterObstacle(16 - data.y, 54 - data.x, data.value);
+    socket.on('set_obstacle', d => store.map.caracterObstacle(16 - d.y, 54 - d.x, d.value));
+
+    socket.on('attack', d => store['caracter' + d.name].giveDamage(d.damage));
+
+    socket.on('got_flag', d => {
+        store.ourFlag.x = store['ennemy' + d.name].x;
+        store.ourFlag.y = store['ennemy' + d.name].y - 24;
     });
 
-    socket.on('attack', function (data) {
-        store['caracter' + data.name].giveDamage(data.damage);
-    });
+    socket.on('death', d => store['ennemy' + d.name].kill());
 
-    socket.on('got_flag', function (data) {
-        store.ourFlag.x = store['ennemy' + data.name].x;
-        store.ourFlag.y = store['ennemy' + data.name].y - 24;
-    });
-
-    socket.on('death', function (data) {
-        store['ennemy' + data.name].kill();
-    });
-
-    socket.on('we_have_a_winner', function () {
+    socket.on('we_have_a_winner', () => {
         const looser = game.add.text(game.world.centerX, game.world.centerY, lang[store.selectedLang].LOOSE, {
             fill: '#000000',
             font: 'bold 32px Almendra'
@@ -123,22 +119,22 @@ export function addEnnemies(data) {
         //         victory: false,
         //         defeat: true
         //     };
-            // $.ajax({
-            //     url: '/update_ratio',
-            //     type: 'PUT',
-            //     data: body,
-            //     success: function (data) {
-            //         // store.user_infos = data.infos;
-            //     },
-            //     error: function (err) {
-            //     }
-            // });
+        // $.ajax({
+        //     url: '/update_ratio',
+        //     type: 'PUT',
+        //     data: body,
+        //     success: function (data) {
+        //         // store.user_infos = data.infos;
+        //     },
+        //     error: function (err) {
+        //     }
+        // });
         // }
         game.paused = true;
 
     });
 
-    socket.on('we_have_a_looser', function () {
+    socket.on('we_have_a_looser', () => {
         const winner = game.add.text(game.world.centerX, game.world.centerY, lang[store.selectedLang].WIN, {
             fill: '#000000',
             font: 'bold 32px Almendra'
@@ -150,16 +146,16 @@ export function addEnnemies(data) {
         //         victory: false,
         //         defeat: true
         //     };
-            // $.ajax({
-            //     url: '/update_ratio',
-            //     type: 'PUT',
-            //     data: body,
-            //     success: function (data) {
-            //         // user_infos = data.infos;
-            //     },
-            //     error: function (err) {
-            //     }
-            // });
+        // $.ajax({
+        //     url: '/update_ratio',
+        //     type: 'PUT',
+        //     data: body,
+        //     success: function (data) {
+        //         // user_infos = data.infos;
+        //     },
+        //     error: function (err) {
+        //     }
+        // });
         // }
         game.paused = true;
     });

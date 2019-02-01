@@ -55,7 +55,7 @@ export class Ennemy extends Warrior {
             this.path.findPath(
                 Math.round(this.x / 32),
                 Math.round(this.y / 16),
-                Math.abs(Math.round(this.newPosX / 32)), //TODO: Bug to fix
+                Math.abs(Math.round(this.newPosX / 32)), // TODO: Bug to fix
                 Math.abs(Math.round(this.newPosY / 16)),
                 (path) => {
                     if (path === null) {
@@ -75,8 +75,7 @@ export class Ennemy extends Warrior {
                         walkAnimation(this, path[0].x, path[1].x, path[0].y, path[1].y);
                         store.all.sort('x', Group.SORT_ASCENDING);
                         store.all.sort('y', Group.SORT_ASCENDING);
-                    }
-                    else {
+                    } else {
                         this.body.velocity.x = 0;
                         this.body.velocity.y = 0;
                     }

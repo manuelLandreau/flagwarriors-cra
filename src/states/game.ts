@@ -33,7 +33,7 @@ export class GameState extends State {
 
         this.add.image(0, 0, 'background');
 
-        //tile map
+        // Tile map
         store.tileGroup = this.add.group();
         store.map = new Map(this.game, store.tileGroup);
         store.map.spawnTiles();
@@ -43,7 +43,7 @@ export class GameState extends State {
         store.sword2 = this.game.add.audio('sword2');
         store.pare = this.game.add.audio('pare');
 
-        //groups
+        // Groups
         store.all = this.add.group();
         store.arrows = this.add.group();
         store.arrows.createMultiple(90, 'arrow');
@@ -70,7 +70,7 @@ export class GameState extends State {
             kaboom.animations.add('kaboom');
         });
 
-        //buttons
+        // Buttons
         this.warriorButton = this.add.image(-16, 772, 'warrior');
         this.warriorButton.scale.setTo(2);
         store.wallButton = this.add.button(49, 772, 'walle', this.wallAction);
@@ -98,26 +98,6 @@ export class GameState extends State {
         store.undoButton = this.add.button(350, 770, 'undo', this.undo, this);
     }
 
-    static onDragSprite(sprite) {
-        if (sprite.y < 384 || sprite.y > 750) {
-            sprite.tint = 0xFF7F50;
-        } else {
-            sprite.tint = 0xFFFFFF;
-        }
-    }
-
-    // Caracter selection handler
-    static spriteDragStart() {
-        store.tileGroup.forEach(tile => tile.alpha = 0.3);
-        store.allies.forEach(caracter => caracter.selected = false);
-    }
-
-    static readyCheck(game) {
-        if (store.wallCount > 13 && i > 5 && j > 2) {
-            store.readyButton = game.add.button(416, 768, 'ready', readyAction);
-        }
-    }
-
     addWarrior(pointer) {
         if (pointer.y > 384) {
             store['caracter' + i] = new Ally(
@@ -132,7 +112,7 @@ export class GameState extends State {
             this.warriorDrag.x = 16;
             this.warriorDrag.y = 804;
             this.warriorDrag.tint = '0xFFFFFF';
-            if (i == 6) {
+            if (i === 6) {
                 this.warriorDrag.kill();
                 this.warriorButton.kill();
                 GameState.readyCheck(this.game);
@@ -162,7 +142,7 @@ export class GameState extends State {
             this.towerDrag.x = 120;
             this.towerDrag.y = 812;
             this.towerDrag.tint = '0xFFFFFF';
-            if (j == 3) {
+            if (j === 3) {
                 GameState.readyCheck(this.game);
                 this.towerDrag.kill();
                 this.towerButton.kill();
@@ -195,13 +175,19 @@ export class GameState extends State {
     undo() {
         console.log(store.undo);
         if (store.undo.length > 0) {
-            if (store.readyButton) store.readyButton.destroy();
+            if (store.readyButton) {
+                store.readyButton.destroy();
+            }
             const obj = store.undo.pop();
             switch (obj.type) {
                 case 'tower':
                     store['tower' + obj.name].destroy();
-                    if (!this.towerDrag.alive) this.towerDrag.revive();
-                    if (!this.towerButton.alive) this.towerButton.revive();
+                    if (!this.towerDrag.alive) {
+                        this.towerDrag.revive();
+                    }
+                    if (!this.towerButton.alive) {
+                        this.towerButton.revive();
+                    }
                     j--;
                     this.wallAction();
                     break;
@@ -216,8 +202,12 @@ export class GameState extends State {
                     break;
                 case 'caracter':
                     store['caracter' + obj.name].destroy();
-                    if (!this.warriorDrag.alive) this.warriorDrag.revive();
-                    if (!this.warriorButton.alive) this.warriorButton.revive();
+                    if (!this.warriorDrag.alive) {
+                        this.warriorDrag.revive();
+                    }
+                    if (!this.warriorButton.alive) {
+                        this.warriorButton.revive();
+                    }
                     i--;
                     this.wallAction();
                     break;
@@ -228,16 +218,21 @@ export class GameState extends State {
     update() {
         this.physics.arcade.collide(store.arrows, store.all);
 
-        if (store.caracter1)
+        if (store.caracter1) {
             store.caracter1.getFlag();
-        if (store.caracter2)
+        }
+        if (store.caracter2) {
             store.caracter2.getFlag();
-        if (store.caracter3)
+        }
+        if (store.caracter3) {
             store.caracter3.getFlag();
-        if (store.caracter4)
+        }
+        if (store.caracter4) {
             store.caracter4.getFlag();
-        if (store.caracter5)
+        }
+        if (store.caracter5) {
             store.caracter5.getFlag();
+        }
 
         if (this.physics.arcade.distanceToXY(store.theirFlag, 240, 774) < 16) {
             socket.emit('we_have_a_winner', {gameId: store.gameId});
@@ -247,6 +242,26 @@ export class GameState extends State {
             });
             winner.anchor.setTo(0.5);
             this.game.paused = true;
+        }
+    }
+
+    static onDragSprite(sprite) {
+        if (sprite.y < 384 || sprite.y > 750) {
+            sprite.tint = 0xFF7F50;
+        } else {
+            sprite.tint = 0xFFFFFF;
+        }
+    }
+
+    // Caracter selection handler
+    static spriteDragStart() {
+        store.tileGroup.forEach(tile => tile.alpha = 0.3);
+        store.allies.forEach(caracter => caracter.selected = false);
+    }
+
+    static readyCheck(game) {
+        if (store.wallCount > 13 && i > 5 && j > 2) {
+            store.readyButton = game.add.button(416, 768, 'ready', readyAction);
         }
     }
 }

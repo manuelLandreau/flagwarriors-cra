@@ -21,6 +21,9 @@ export default function GamePage() {
     game = new Game(config);
 
     return (
-        <Chat />
+        <div>
+            <div id="root"/>
+            <Chat/>
+        </div>
     )
 }

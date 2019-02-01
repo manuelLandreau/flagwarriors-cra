@@ -1,0 +1,33 @@
+html,
+body,
+#root {
+    height: 100%;
+    /*background-image: url('../assets/paper.png');*/
+    background-size: cover;
+}
+
+body {
+    width: 100%;
+    margin: 0;
+}
+
+#app {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.chat {
+    display: block;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    width: auto !important;
+}

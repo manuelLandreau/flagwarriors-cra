@@ -1,4 +1,4 @@
-import { State } from '../interfaces/state';
+import {State} from '../interfaces/state';
 
 /**
  * State to load all game resources.
@@ -9,7 +9,7 @@ export class PreloadState extends State {
     create() {
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
-        //Transistion plugin
+        // Transistion plugin
         // this.game.stateTransition = this.game.plugins.add(Phaser.Plugin.StateTransition);
         // this.game.stateTransition.configure({
         //     duration: Phaser.Timer.SECOND * 0.8,
@@ -62,7 +62,7 @@ export class PreloadState extends State {
     }
 
     fileComplete(progress) {
-        this.loadText.setText("Chargement " + progress + "%");
+        this.loadText.setText('Chargement ' + progress + '%');
     }
 
     loadComplete() {

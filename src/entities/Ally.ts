@@ -19,9 +19,9 @@ export class Ally extends Warrior {
     newPosY: number;
     pathx: number;
     pathy: number;
-    path;
-    move;
-    attack;
+    path: any;
+    move: any;
+    attack: any;
     name: string;
 
     constructor(game: Game,
@@ -48,6 +48,7 @@ export class Ally extends Warrior {
         this.name = name;
 
         // Groups
+        // @ts-ignore
         store.allies.push(this);
         store.all.add(this);
 
@@ -105,7 +106,9 @@ export class Ally extends Warrior {
                         this.pathx = path[0].x;
                         this.pathy = path[0].y;
                     } else {
-                        if (this.body) this.body.velocity.setTo(0, 0);
+                        if (this.body) {
+                            this.body.velocity.setTo(0, 0);
+                        }
                     }
                 });
             this.path.calculate();
@@ -157,8 +160,9 @@ export class Ally extends Warrior {
     giveDamage(lp) {
         this.health -= lp;
         if (this.health < 0) {
-            if (this.alive)
+            if (this.alive) {
                 store.deadWarior++;
+            }
             this.kill();
             socket.emit('death', {name: this.name, gameId});
             if (store.deadWarior > 5) {

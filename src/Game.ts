@@ -1,7 +1,5 @@
-import 'pixi';
-import 'p2';
-import * as Phaser from 'phaser';
-import 'phaser-state-transition';
+import Phaser from './Phaser';
+// import 'phaser-state-transition';
 import './register-sw';
 import {BootState} from './states/boot';
 import {PreloadState} from './states/preload';
@@ -28,17 +26,17 @@ export default class Game extends Phaser.Game {
     private initStates() {
 
         if (window.localStorage.getItem('lang') != null) {
-            if (window.localStorage.getItem('lang') == 'fr') {
+            if (window.localStorage.getItem('lang') === 'fr') {
                 store.selectedLang = 'fr';
-            } else if (window.localStorage.getItem('lang') == 'es') {
+            } else if (window.localStorage.getItem('lang') === 'es') {
                 store.selectedLang = 'es';
             } else {
                 store.selectedLang = 'en';
             }
         }
 
-        if (window.localStorage.getItem('sound') != null) {
-            store.sound = window.localStorage.getItem('sound') == 'on';
+        if (window.localStorage.getItem('sound') !== null) {
+            store.sound = window.localStorage.getItem('sound') === 'on';
         }
 
         this.state.add('Boot', BootState);
