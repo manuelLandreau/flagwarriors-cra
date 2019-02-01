@@ -13,7 +13,7 @@ const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
-const phaserRoot = path.join(__dirname, 'node_modules/phaser/build/custom/');
+const phaserRoot = path.join(__dirname, '../node_modules/phaser/build/custom/');
 const phaserPath = path.join(phaserRoot, 'phaser-split.js');
 const pixiPath = path.join(phaserRoot, 'pixi.js');
 const p2Path = path.join(phaserRoot, 'p2.js');
@@ -109,9 +109,9 @@ module.exports = {
       '.jsx',
     ],
     alias: {
-      // pixi: pixiPath,
-      // phaser: phaserPath,
-      // p2: p2Path,
+      pixi: pixiPath,
+      phaser: phaserPath,
+      p2: p2Path,
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',

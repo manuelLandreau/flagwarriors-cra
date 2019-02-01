@@ -29,7 +29,7 @@ export class GameState extends State {
     }
 
     create() {
-        window.document.querySelector('.chat').setAttribute('style', 'display: block');
+        // window.document.querySelector('.chat').setAttribute('style', 'display: block');
 
         this.add.image(0, 0, 'background');
 

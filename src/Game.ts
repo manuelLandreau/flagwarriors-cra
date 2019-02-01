@@ -1,4 +1,6 @@
-import Phaser from './Phaser';
+import 'pixi';
+import 'p2';
+import * as Phaser from 'phaser'
 // import 'phaser-state-transition';
 import './register-sw';
 import {BootState} from './states/boot';

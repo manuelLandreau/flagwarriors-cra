@@ -6,10 +6,10 @@ import Home from './Pages/Home';
 import './styles.css';
 // import registerServiceWorker from './registerServiceWorker';
 
-// import GamePage from './Pages/GamePage';
+import GamePage from './Pages/GamePage';
 // registerServiceWorker()
 
-const GamePage = React.lazy(() => import('./Pages/GamePage'));
+// const GamePage = React.lazy(() => import('./Pages/GamePage'));
 
 class App extends React.Component {
     render(): React.ReactNode {
@@ -30,7 +30,5 @@ class App extends React.Component {
         );
     }
 }
-
-console.log(document.getElementById('app'));
 
 ReactDOM.render(<App/>, document.getElementById('root'));
