@@ -34,7 +34,7 @@ export function readyAction(readyButton) {
     );
 
     if (ennemyData) {
-        addEnnemies(ennemyData);
+        startGame();
     } else {
         store.waitText1 = game.add.text(game.world.centerX, game.world.centerY - 32, lang[store.selectedLang].WAITING_READY, {
             fill: '#000000',
@@ -45,23 +45,21 @@ export function readyAction(readyButton) {
 }
 
 socket.on('ready', data => {
-    console.log('ready');
     ennemyData = data;
     if (store.readySwitch) {
-        addEnnemies(ennemyData);
-        ennemyData = null;
+        startGame();
     }
+});
 
-    if (game.waitText1) {
-        game.waitText1.destroy();
-    }
+function startGame() {
+    addEnnemies(ennemyData);
 
-    if (game.waitText2) {
-        game.waitText2.destroy();
+    if (store.waitText1) {
+        store.waitText1.destroy();
     }
 
     store.gameOn = true;
-});
+}
 
 export function addEnnemies(data) {
     store.undoButton.destroy();

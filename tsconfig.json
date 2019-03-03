@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "skipLibCheck": true,
     "jsx": "react",
     "outDir": "build/dist",
     "module": "esnext",

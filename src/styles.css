@@ -1,20 +1,27 @@
+@import "~knacss/css/knacss-unminified.css";
+@import "~nes.css/css/nes-core.min.css";
+
+html, body, h1, h2, h3, h4, h5, h6 {
+    font-family: "Press Start 2P", sans-serif;
+}
+
+h1 {
+    font-size: 2.6rem;
+}
+
+a:hover, a:focus {
+    text-decoration: none;
+}
+
 html,
 body,
 #root {
     height: 100%;
-    /*background-image: url('../assets/paper.png');*/
-    background-size: cover;
 }
 
 body {
     margin: 0;
     padding: 0;
-}
-
-#app {
-    position: absolute;
-    height: 100%;
-    width: 100%;
 }
 
 .chat {
@@ -24,10 +31,23 @@ body {
 #root {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /*justify-content: center;*/
     align-items: center;
 }
 
 canvas {
     width: auto !important;
+}
+
+.p-absolute {
+    position: absolute;
+}
+
+.p-relative {
+    position: relative;
+}
+
+.nes-dialog {
+    position: absolute;
+    top: 20vh;
 }

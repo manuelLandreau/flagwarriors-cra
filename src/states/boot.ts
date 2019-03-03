@@ -20,10 +20,10 @@ export class BootState extends State {
      * Setup propper game scaling.
      */
     private setScale() {
-        this.game.scale.pageAlignHorizontally = true;
-        this.game.scale.pageAlignVertically = true;
-        this.game.scale.forcePortrait = true;
-        this.game.scale.aspectRatio = 1.28;
+        // this.game.scale.pageAlignHorizontally = true;
+        // this.game.scale.pageAlignVertically = true;
+        // this.game.scale.forcePortrait = true;
+        // this.game.scale.aspectRatio = 1.28;
         this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     }
 }
