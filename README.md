@@ -2,20 +2,21 @@
 A simple phaser.js game inspired by AoE2 and "Capture the Flag"
 
 Remake from the [2016 version](https://github.com/manuelLandreau/flagwarriors) 
-For now it's a mess, some help will be nice ;)
 
-Demo [here](https://flagwarriors.herokuapp.com)
+For now it's a mess, some help would be nice ;)
+
+Demo [here](https://relaxed-beaver-a7b6ef.netlify.com)
 
 ## packages: 
 * phaser 2.x
 * easystar (path finding)
-* Wrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+* Wrapped in [Create React App](https://github.com/facebookincubator/create-react-app).
 * socket.io (multi player 2p)
+* Chat integretion
 * ...
 
 ## TODO : 
-* Chat integretion (in progress)
-* Create game and join system
+* Create game and join system (in progress)
 * Better assets
 * Tests and some clean up
 * ...
