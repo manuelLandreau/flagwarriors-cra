@@ -8,7 +8,7 @@ import {Tower} from '../entities/Tower';
 
 // export const socket = io('https://flagwarriors.herokuapp.com');
 export const socket = io(process.env.NODE_ENV === 'development' ? 'http://localhost:9000' : 'https://fl-server.herokuapp.com');
-console.log(process.env.NODE_ENV);
+
 let ennemyData;
 
 export function readyAction(readyButton) {
