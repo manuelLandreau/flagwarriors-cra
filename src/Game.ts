@@ -2,7 +2,6 @@ import 'pixi';
 import 'p2';
 import * as Phaser from 'phaser'
 // import 'phaser-state-transition';
-import './register-sw';
 import {BootState} from './states/boot';
 import {PreloadState} from './states/preload';
 import {GameState} from './states/game';

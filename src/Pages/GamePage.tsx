@@ -12,7 +12,7 @@ export default function GamePage() {
         width: 480,
         height: 800,
         renderer: Phaser.AUTO,
-        parent: 'root',
+        parent: 'game',
         antialias: false, // Used to keep pixelated graphics.
         resolution: 1,
         forceSetTimeOut: false
@@ -22,7 +22,7 @@ export default function GamePage() {
 
     return (
         <div>
-            <div id="root"/>
+            <div id="game"/>
             <Chat/>
         </div>
     )

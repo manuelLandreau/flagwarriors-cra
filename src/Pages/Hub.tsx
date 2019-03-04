@@ -2,6 +2,7 @@ import * as React from 'react';
 import {lang} from '../config/lang';
 import {store} from '../config/store';
 import {Link} from 'react-router-dom';
+import Layout from './Layout';
 
 export default function Hub() {
 
@@ -20,7 +21,7 @@ export default function Hub() {
     }
 
     return (
-        <div>
+        <Layout>
             <section className="txtcenter pas">
                 <form className="nes-field">
                     <label htmlFor="name_field">{lang[store.selectedLang].FIND}</label>
@@ -60,7 +61,7 @@ export default function Hub() {
                 </div>
             </div>
 
-        </div>
+        </Layout>
     );
 }
 

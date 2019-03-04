@@ -29,7 +29,7 @@ export default function ({children}) {
                 <h1>FlagWarriors</h1>
             </div>
 
-            <div className="pts">{children}</div>
+            <div className="pts txtcenter">{children}</div>
 
             <footer className="icon-list mtl pas">
                 <div className="fr">

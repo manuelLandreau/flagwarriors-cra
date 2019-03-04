@@ -28,11 +28,12 @@ body {
     display: block;
 }
 
-#root {
-    display: flex;
-    flex-direction: column;
-    /*justify-content: center;*/
-    align-items: center;
+#game {
+    height: 100vh;
+}
+
+#game canvas {
+    margin: 0 auto;
 }
 
 canvas {

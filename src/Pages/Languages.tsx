@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {store} from '../config/store';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {lang} from '../config/lang';
+import Layout from './Layout';
 
 export default function Languages(props) {
 
@@ -13,7 +14,7 @@ export default function Languages(props) {
     }
 
     return (
-        <div>
+        <Layout>
             <section className="txtcenter mtl">
                 <label onClick={() => selectedLang = 'en'}>
                     <input type="radio" className="nes-radio" name="language" defaultChecked={selectedLang === 'en'}
@@ -49,7 +50,7 @@ export default function Languages(props) {
                 </div>
                 <div className="clear"/>
             </div>
-        </div>
+        </Layout>
     );
 }
 

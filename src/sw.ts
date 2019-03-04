@@ -1,7 +1,6 @@
 ((window, document) => {
 
-    if ('serviceWorker' in navigator &&
-        window.location.protocol === 'https:') {
+    if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/service-worker.js')
             .then(registration => {
                 registration.onupdatefound = () => {

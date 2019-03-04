@@ -2,11 +2,12 @@ import * as React from 'react';
 import {Link} from 'react-router-dom';
 import {store} from '../config/store';
 import {lang} from '../config/lang';
+import Layout from './Layout';
 
 export default function Home() {
 
     return (
-        <div>
+        <Layout>
             <section className="txtcenter">
                 <Link to="/game" className="nes-btn is-warning">
                     {lang[store.selectedLang].PLAY_RANDOM}
@@ -18,7 +19,7 @@ export default function Home() {
                     {lang[store.selectedLang].CREATE_JOIN}
                 </Link>
             </section>
-        </div>
+        </Layout>
     );
 }
 

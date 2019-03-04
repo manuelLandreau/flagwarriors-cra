@@ -1,41 +1,36 @@
+// @ts-ignore
 import * as React from 'react';
+// @ts-ignore
 import * as ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
-import {AnimatedSwitch} from 'react-router-transition';
+// @ts-ignore
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Home from './Pages/Home';
 import './styles.css';
-// import registerServiceWorker from './registerServiceWorker';
+import './sw.ts';
 
-import Layout from './Pages/Layout';
 import GamePage from './Pages/GamePage';
 import Languages from './Pages/Languages';
 import Hub from './Pages/Hub';
-// registerServiceWorker()
 
 // const GamePage = React.lazy(() => import('./Pages/GamePage'));
 
+// @ts-ignore
 class App extends React.Component {
     render(): React.ReactNode {
         return (
             <Router>
                 <React.Suspense fallback={<progress/>}>
-                    <Layout>
-                        <AnimatedSwitch
-                            atEnter={{opacity: 0}}
-                            atLeave={{opacity: 0}}
-                            atActive={{opacity: 1}}
-                            className="switch-wrapper w100"
-                        >
-                            <Route exact path="/" component={Home}/>
-                            <Route exact path="/game" component={GamePage}/>
-                            <Route exact path="/languages" component={Languages}/>
-                            <Route exact path="/hub" component={Hub}/>
-                        </AnimatedSwitch>
-                    </Layout>
+                    <Switch>
+                        <Route exact path="/" component={Home}/>
+                        <Route exact path="/languages" component={Languages}/>
+                        <Route exact path="/hub" component={Hub}/>
+                        <Route exact path="/game" component={GamePage}/>
+                    </Switch>
                 </React.Suspense>
             </Router>
         );
     }
 }
 
+// @ts-ignore
 ReactDOM.render(<App/>, document.getElementById('root'));

@@ -12,7 +12,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const phaserRoot = path.join(__dirname, '../node_modules/phaser/build/custom/');
 const phaserPath = path.join(phaserRoot, 'phaser-split.js');
 const pixiPath = path.join(phaserRoot, 'pixi.js');
@@ -242,6 +242,16 @@ module.exports = {
     ],
   },
   plugins: [
+    new SWPrecacheWebpackPlugin({
+      cacheId: 'fw-cache',
+      filename: 'service-worker.js',
+      minify: true,
+      staticFileGlobs: [
+        `/assets/**/*`,
+        `/*.{html,json,ico,png,svg}`
+      ],
+      stripPrefix: `/`
+    }),
     // Makes some environment variables available in index.html.
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
