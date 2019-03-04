@@ -15,6 +15,11 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
+const phaserRoot = path.join(__dirname, '../node_modules/phaser/build/custom/');
+const phaserPath = path.join(phaserRoot, 'phaser-split.js');
+const pixiPath = path.join(phaserRoot, 'pixi.js');
+const p2Path = path.join(phaserRoot, 'p2.js');
+
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
 const publicPath = paths.servedPath;
@@ -47,6 +52,14 @@ const extractTextPluginOptions = shouldUseRelativeAssetPaths
   ? // Making sure that the publicPath goes back to to build folder.
     { publicPath: Array(cssFilename.split('/').length).join('../') }
   : {};
+
+function exposeRules(modulePath, name) {
+  return {
+    test: (path) => modulePath === path,
+    loader: 'expose-loader',
+    options: name
+  };
+}
 
 // This is the production configuration.
 // It compiles slowly and is focused on producing a fast and minimal bundle.
@@ -103,7 +116,9 @@ module.exports = {
       '.jsx',
     ],
     alias: {
-      
+      pixi: pixiPath,
+      phaser: phaserPath,
+      p2: p2Path,
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -247,13 +262,20 @@ module.exports = {
           // Make sure to add the new loader(s) before the "file" loader.
         ],
       },
+      exposeRules(pixiPath, 'PIXI'),
+      exposeRules(p2Path, 'p2'),
+      exposeRules(phaserPath, 'Phaser')
     ],
   },
   plugins: [
     new SWPrecacheWebpackPlugin({
+      navigateFallback: publicUrl + '/index.html',
+      dontCacheBustUrlsMatching: /\.\w{8}\./,
       cacheId: 'fw-cache',
       filename: 'service-worker.js',
       minify: true,
+      navigateFallbackWhitelist: [/^(?!\/__).*/],
+      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
       staticFileGlobs: [
         `/assets/**/*`,
         `/*.{html,json,ico,png,svg}`
@@ -324,7 +346,8 @@ module.exports = {
       // Use multi-process parallel running to improve the build speed
       // Default number of concurrent runs: os.cpus().length - 1
       parallel: true,
-      // Enable file caching
+      // Enable file cachingexposeRules(pixiPath, 'PIXI'),
+
       cache: true,
       sourceMap: shouldUseSourceMap,
     }), // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
@@ -339,34 +362,34 @@ module.exports = {
     }),
     // Generate a service worker script that will precache, and keep up to date,
     // the HTML & assets that are part of the Webpack build.
-    new SWPrecacheWebpackPlugin({
-      // By default, a cache-busting query parameter is appended to requests
-      // used to populate the caches, to ensure the responses are fresh.
-      // If a URL is already hashed by Webpack, then there is no concern
-      // about it being stale, and the cache-busting can be skipped.
-      dontCacheBustUrlsMatching: /\.\w{8}\./,
-      filename: 'service-worker.js',
-      logger(message) {
-        if (message.indexOf('Total precache size is') === 0) {
-          // This message occurs for every build and is a bit too noisy.
-          return;
-        }
-        if (message.indexOf('Skipping static resource') === 0) {
-          // This message obscures real errors so we ignore it.
-          // https://github.com/facebookincubator/create-react-app/issues/2612
-          return;
-        }
-        console.log(message);
-      },
-      minify: true,
-      // For unknown URLs, fallback to the index page
-      navigateFallback: publicUrl + '/index.html',
-      // Ignores URLs starting from /__ (useful for Firebase):
-      // https://github.com/facebookincubator/create-react-app/issues/2237#issuecomment-302693219
-      navigateFallbackWhitelist: [/^(?!\/__).*/],
-      // Don't precache sourcemaps (they're large) and build asset manifest:
-      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
-    }),
+    // new SWPrecacheWebpackPlugin({
+    //   // By default, a cache-busting query parameter is appended to requests
+    //   // used to populate the caches, to ensure the responses are fresh.
+    //   // If a URL is already hashed by Webpack, then there is no concern
+    //   // about it being stale, and the cache-busting can be skipped.
+    //   dontCacheBustUrlsMatching: /\.\w{8}\./,
+    //   filename: 'service-worker.js',
+    //   logger(message) {
+    //     if (message.indexOf('Total precache size is') === 0) {
+    //       // This message occurs for every build and is a bit too noisy.
+    //       return;
+    //     }
+    //     if (message.indexOf('Skipping static resource') === 0) {
+    //       // This message obscures real errors so we ignore it.
+    //       // https://github.com/facebookincubator/create-react-app/issues/2612
+    //       return;
+    //     }
+    //     console.log(message);
+    //   },
+    //   minify: true,
+    //   // For unknown URLs, fallback to the index page
+    //   navigateFallback: publicUrl + '/index.html',
+    //   // Ignores URLs starting from /__ (useful for Firebase):
+    //   // https://github.com/facebookincubator/create-react-app/issues/2237#issuecomment-302693219
+    //   navigateFallbackWhitelist: [/^(?!\/__).*/],
+    //   // Don't precache sourcemaps (they're large) and build asset manifest:
+    //   staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
+    // }),
     // Moment.js is an extremely popular library that bundles large locale files
     // by default due to how Webpack interprets its code. This is a practical
     // solution that requires the user to opt into importing specific locales.
@@ -378,7 +401,7 @@ module.exports = {
       async: false,
       tsconfig: paths.appTsProdConfig,
       tslint: paths.appTsLint,
-    }),
+    })
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.
