@@ -10,13 +10,14 @@ export default function Chat() {
     const handleNewUserMessage = (message: string) => socket.emit('ally_message', {gameId: 1, message});
 
     return (
-        <div className="App">
-            <Widget
-                handleNewUserMessage={handleNewUserMessage}
-                // profileAvatar={logo}
-                title="Flag Warriors"
-                subtitle="Chat with the ennemy !"
-            />
-        </div>
+        <Widget
+            handleNewUserMessage={handleNewUserMessage}
+            // profileAvatar={logo}
+            title="Flag Warriors"
+            subtitle="Chat with the ennemy !"
+            launcher={handleToggle => (
+                <button className="nes-btn" onClick={handleToggle}>Chat</button>
+            )}
+        />
     );
 }

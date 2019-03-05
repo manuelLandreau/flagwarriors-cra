@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom';
 import * as React from 'react';
 import {store} from '../config/store';
 import {lang} from '../config/lang';
-import logo from '../logo.png';
+import fw from '../fw.png';
 
 export default function ({children}) {
     const [sound, setSound] = React.useState(store.sound);
@@ -24,20 +24,11 @@ export default function ({children}) {
                 <div className="clear"/>
             </header>
 
-            <div className="mts txtcenter">
-                <img src={logo} alt=""/>
-                <h1>FlagWarriors</h1>
+            <div className="mtl mbm txtcenter">
+                <img src={fw} alt=""/>
             </div>
 
             <div className="pts txtcenter">{children}</div>
-
-            <footer className="icon-list mtl pas">
-                <div className="fr">
-                    <i className="nes-icon github is-large"/>
-                    <i className="nes-icon twitter is-large"/>
-                </div>
-                <div className="clear"/>
-            </footer>
         </div>
     )
 }

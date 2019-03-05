@@ -19,6 +19,12 @@ export default function Home() {
                     {lang[store.selectedLang].CREATE_JOIN}
                 </Link>
             </section>
+            <footer className="icon-list p-absolute" style={{bottom: 10, right: 10}}>
+                <a href="https://github.com/manuellandreau/flagwarriors-cra">
+                    <i className="nes-icon github is-large"/>
+                </a>
+                <div className="clear"/>
+            </footer>
         </Layout>
     );
 }

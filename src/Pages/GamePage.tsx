@@ -23,7 +23,17 @@ export default function GamePage() {
     return (
         <div>
             <div id="game"/>
-            <Chat/>
+            <div style={{position: 'relative', width: 'calc(0.6 * 93vh)', maxWidth: '100vw', height: '7vh', margin: '0 auto'}}>
+                <Chat/>
+                {/*<button className="nes-btn is-success fr">Ready</button>*/}
+                <div className="fr mts">
+                    <i className="nes-icon heart"></i>
+                    <i className="nes-icon heart"></i>
+                    <i className="nes-icon heart"></i>
+                    <i className="nes-icon heart"></i>
+                    <i className="nes-icon heart"></i>
+                </div>
+            </div>
         </div>
     )
 }

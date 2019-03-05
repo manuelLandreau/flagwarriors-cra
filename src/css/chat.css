@@ -3,8 +3,7 @@
 }
 
 .rcw-conversation-container .rcw-header {
-    background-color: #35cce6;
-    border-radius: 10px 10px 0 0;
+    background-color: #e6001c;
     color: #fff;
     display: -ms-flexbox;
     display: flex;
@@ -27,13 +26,11 @@
 .rcw-conversation-container .avatar {
     width: 40px;
     height: 40px;
-    border-radius: 100%;
     margin-right: 10px;
     vertical-align: middle
 }
 
 .rcw-full-screen .rcw-header {
-    border-radius: 0;
     -ms-flex-negative: 0;
     flex-shrink: 0;
     position: relative
@@ -45,7 +42,6 @@
 
 .rcw-full-screen .rcw-close-button {
     background-color: #35cce6;
-    border: 0;
     display: block;
     position: absolute;
     right: 10px;
@@ -60,7 +56,6 @@
 
 @media screen and (max-width: 800px) {
     .rcw-conversation-container .rcw-header {
-        border-radius: 0;
         -ms-flex-negative: 0;
         flex-shrink: 0;
         position: relative
@@ -72,7 +67,6 @@
 
     .rcw-conversation-container .rcw-close-button {
         background-color: #35cce6;
-        border: 0;
         display: block;
         position: absolute;
         right: 10px;
@@ -88,8 +82,7 @@
 
 .rcw-messages-container {
     background-color: #fff;
-    height: 50vh;
-    max-height: 410px;
+    height: 74vh;
     overflow-y: scroll;
     padding-top: 10px
 }
@@ -114,12 +107,10 @@
     background-color: #f4f7f9;
     height: 45px;
     padding: 5px;
-    border-radius: 0 0 10px 10px
 }
 
 .rcw-new-message {
     width: 100%;
-    border: 0;
     background-color: #f4f7f9;
     height: 30px;
     padding-left: 15px
@@ -131,7 +122,6 @@
 
 .rcw-send {
     background: #f4f7f9;
-    border: 0
 }
 
 .rcw-send .rcw-send-icon {
@@ -140,27 +130,24 @@
 
 @media screen and (max-width: 800px) {
     .rcw-sender {
-        border-radius: 0;
         -ms-flex-negative: 0;
         flex-shrink: 0
     }
 }
 
 .rcw-conversation-container {
-    -webkit-animation-delay: 0;
+    position: absolute;
+    bottom: 4vh;
+    width: calc(0.6 * 94vh);
     -webkit-animation-duration: .5s;
     -webkit-animation-name: c;
     -webkit-animation-fill-mode: forwards;
-    -moz-animation-delay: 0;
     -moz-animation-duration: .5s;
     -moz-animation-name: c;
     -moz-animation-fill-mode: forwards;
-    animation-delay: 0;
     animation-duration: .5s;
     animation-name: c;
     animation-fill-mode: forwards;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px 1px #b5b5b5
 }
 
 .rcw-slide-out {
@@ -206,7 +193,6 @@
     height: 25px;
     text-align: center;
     line-height: 25px;
-    border-radius: 50%
 }
 
 .rcw-launcher {
@@ -225,9 +211,6 @@
     -ms-flex-item-align: end;
     align-self: flex-end;
     background-color: #35cce6;
-    border: 0;
-    border-radius: 50%;
-    box-shadow: 0 2px 10px 1px #b5b5b5;
     height: 60px;
     margin-top: 10px;
     width: 60px
@@ -322,20 +305,7 @@
 }
 
 .rcw-widget-container {
-    bottom: 0;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    margin: 0 20px 20px 0;
-    max-width: 370px;
-    position: fixed;
-    right: 0;
-    z-index: 1
-}
-
-.rcw-opened {
-    width: 90vw
+    position: absolute;
 }
 
 .rcw-full-screen {
@@ -373,7 +343,6 @@
 }
 
 .rcw-client, .rcw-response {
-    border-radius: 10px;
     padding: 15px;
     max-width: 215px;
     text-align: left
@@ -394,13 +363,11 @@
 .rcw-avatar {
     width: 40px;
     height: 40px;
-    border-radius: 100%;
     margin-right: 10px
 }
 
 .rcw-snippet {
     background-color: #f4f7f9;
-    border-radius: 10px;
     padding: 15px;
     max-width: 215px;
     text-align: left
