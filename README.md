@@ -1,5 +1,6 @@
 # flagwarriors
 [![GitHub version](https://badge.fury.io/gh/manuellandreau%2Fflagwarriors-cra.svg)](https://badge.fury.io/gh/manuellandreau%2Fflagwarriors-cra)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1b4e223faffa4786a478640fb01b19cb)](https://app.codacy.com/app/manuelLandreau/flagwarriors-cra?utm_source=github.com&utm_medium=referral&utm_content=manuelLandreau/flagwarriors-cra&utm_campaign=Badge_Grade_Dashboard)
 
 A simple phaser.js game inspired by AoE2 and "Capture the Flag"
 
