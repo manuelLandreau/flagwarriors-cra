@@ -1,4 +1,6 @@
 # flagwarriors
+[![GitHub version](https://badge.fury.io/gh/manuellandreau%2Fflagwarriors-cra.svg)](https://badge.fury.io/gh/manuellandreau%2Fflagwarriors-cra)
+
 A simple phaser.js game inspired by AoE2 and "Capture the Flag"
 
 Remake from the [2016 version](https://github.com/manuelLandreau/flagwarriors) 
