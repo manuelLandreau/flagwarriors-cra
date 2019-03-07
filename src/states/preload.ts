@@ -12,7 +12,6 @@ import arrow from '../assets/sprites/arrow.png';
 import background from '../assets/sprites/bg.png';
 import paper from '../assets/sprites/paper.png';
 import start from '../assets/sprites/start.png';
-import ready from '../assets/sprites/contour.png';
 import undo from '../assets/sprites/undo.png';
 import grid from '../assets/sprites/grid.png';
 
@@ -64,7 +63,6 @@ export class PreloadState extends State {
         this.load.image('background', background);
         this.load.image('paper', paper);
         this.load.image('start', start);
-        this.load.image('ready', ready);
         this.load.image('undo', undo);
         this.load.image('grid', grid);
         // this.load.audio('ambiance', './assets/ambiance.mp3');

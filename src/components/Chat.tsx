@@ -11,7 +11,6 @@ export default function Chat() {
     const handleNewUserMessage = (message: string) => socket.emit('ally_message', {gameId: store.gameId, message});
 
     return (
-        <div>
             <Widget
                 handleNewUserMessage={handleNewUserMessage}
                 // profileAvatar={logo}
@@ -21,6 +20,5 @@ export default function Chat() {
                     <button className="nes-btn" onClick={handleToggle}>Chat</button>
                 )}
             />
-        </div>
     );
 }

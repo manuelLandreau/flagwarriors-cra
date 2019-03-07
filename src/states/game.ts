@@ -155,18 +155,19 @@ export class GameState extends State {
         store.tileGroup.forEach(tile => tile.alpha = 0);
     }
 
-    wallAction() {
-        store.wallSwitch = !store.wallSwitch;
+    wallAction(_, __, val = null) {
+        if (val !== null) {
+            store.wallSwitch = val;
+        } else {
+            store.wallSwitch = !store.wallSwitch;
+        }
+
         if (store.wallSwitch) {
-            store.tileGroup.forEach(function (tile) {
-                tile.alpha = 0.3;
-            });
+            store.tileGroup.forEach(tile => tile.alpha = 0.3);
             store.wallButton.tint = '0x00FF00';
             this.game.input.addMoveCallback(store.map.buildWall, this);
         } else {
-            store.tileGroup.forEach(function (tile) {
-                tile.alpha = 0;
-            });
+            store.tileGroup.forEach(tile => tile.alpha = 0);
             store.wallButton.tint = '0xFFFFFF';
         }
     }
@@ -178,6 +179,7 @@ export class GameState extends State {
             switch (obj.type) {
                 case 'tower':
                     store['tower' + obj.name].destroy();
+                    delete store['tower' + obj.name];
                     if (!this.towerDrag.alive) {
                         this.towerDrag.revive();
                     }
@@ -185,19 +187,21 @@ export class GameState extends State {
                         this.towerButton.revive();
                     }
                     j--;
-                    this.wallAction();
                     break;
                 case 'walle':
                     store['walle' + obj.name].destroy();
+                    delete store['walle' + obj.name];
+                    store.wallsArray = store.wallsArray.filter(wall => wall.name !== obj.name);
                     if (!store.wallButton.alive) {
                         store.wallButton.revive();
-                        this.wallAction();
                     }
+                    this.wallAction(null, null, true);
                     store.wallGroup.createMultiple(1, 'walle');
                     store.wallCount--;
                     break;
                 case 'caracter':
                     store['caracter' + obj.name].destroy();
+                    delete store['caracter' + obj.name];
                     if (!this.warriorDrag.alive) {
                         this.warriorDrag.revive();
                     }
@@ -205,7 +209,6 @@ export class GameState extends State {
                         this.warriorButton.revive();
                     }
                     i--;
-                    this.wallAction();
                     break;
             }
         }

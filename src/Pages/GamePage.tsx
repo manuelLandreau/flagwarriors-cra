@@ -72,8 +72,12 @@ function Bottom() {
                         {lifePoints.map((_, i) => <i className="nes-icon heart" key={i}/>)}
                     </div>
                     : <button className={isReady ? 'nes-btn is-success fr' : 'nes-btn is-disabled fr'}
-                              onClick={onReady} hidden={isReadyHidden}>Ready</button>
+                              disabled={!isReady} onClick={onReady} hidden={isReadyHidden}>Ready</button>
                 }
+                <button disabled={true} className={isReady ? 'nes-btn is-success fr' : 'nes-btn is-disabled fr'}
+                        onClick={onReady} hidden={isReadyHidden}>
+                    <span style={{fontSize: 42, lineHeight: 0.15}}>&#8630;</span>
+                </button>
             </div>
         )
     } else {
