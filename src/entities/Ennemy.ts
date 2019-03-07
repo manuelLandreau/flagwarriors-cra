@@ -64,7 +64,8 @@ export class Ennemy extends Warrior {
                         this.move.pause();
                     }
                     if (path && path[1]) {
-                        this.move.resume();
+                        // noinspection BadExpressionStatementJS
+                        this.move.resume;
                         game.physics.arcade.moveToXY(this, path[1].x * 32, path[1].y * 16);
 
                         // Set obstacle on the caracter

@@ -54,7 +54,7 @@ export class Map {
         store.tileGroup.forEach(ti => ti.events.onInputOver.add(tile => {
             if (store.wallSwitch && store.wallCount > 13) {
                 store.wallButton.kill();
-                GameState.readyCheck(this.game);
+                GameState.readyCheck();
                 store.wallSwitch = false;
                 store.tileGroup.forEach(t => t.alpha = 0);
             }

@@ -17,23 +17,6 @@ export abstract class Warrior extends Phaser.Sprite {
     }
 
     /**
-     * Make object dead.
-     */
-    // die() {
-    //   this.alive = false;
-    // }
-
-    /**
-     * Resurrect object.
-     */
-    // respawn(x, y) {
-    //   this.body.x = this.x;
-    //   this.body.y = this.y;
-    //   this.alive = true;
-    //   this.visible = true;
-    // }
-
-    /**
      * Setup object physics.
      */
     private physics() {

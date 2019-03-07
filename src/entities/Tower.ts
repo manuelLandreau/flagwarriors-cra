@@ -3,8 +3,6 @@ import {Warrior} from './Warrior';
 import {store} from '../config/store';
 import {socket} from '../utils/socket-handler';
 
-const {gameId} = store;
-
 /**
  * Tower class.
  */
@@ -56,7 +54,7 @@ export class Tower extends Warrior {
                             socket.emit('attack', {
                                 name: ennemy.name,
                                 damage: game.rnd.integerInRange(8, 15),
-                                gameId: gameId
+                                gameId: store.gameId
                             });
                         }
                         arrow.kill();

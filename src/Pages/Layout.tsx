@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom';
 import * as React from 'react';
 import {store} from '../config/store';
 import {lang} from '../config/lang';
-import fw from '../fw.png';
+import fw from '../assets/img/fw.png';
 
 export default function ({children}) {
     const [sound, setSound] = React.useState(store.sound);

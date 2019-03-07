@@ -6,6 +6,7 @@ import {Tower} from '../entities/Tower';
 import {lang} from '../config/lang';
 import {store} from '../config/store';
 import {readyAction, socket} from '../utils/socket-handler';
+import {emitter} from '../utils/EventEmitter';
 
 // i for warriors, j for towers
 let i = 1, j = 1;
@@ -29,8 +30,6 @@ export class GameState extends State {
     }
 
     create() {
-        // window.document.querySelector('.chat').setAttribute('style', 'display: block');
-
         this.add.image(0, 0, 'background');
 
         // Tile map
@@ -115,7 +114,7 @@ export class GameState extends State {
             if (i === 6) {
                 this.warriorDrag.kill();
                 this.warriorButton.kill();
-                GameState.readyCheck(this.game);
+                GameState.readyCheck();
             }
         } else {
             this.warriorDrag.x = 16;
@@ -143,7 +142,7 @@ export class GameState extends State {
             this.towerDrag.y = 812;
             this.towerDrag.tint = '0xFFFFFF';
             if (j === 3) {
-                GameState.readyCheck(this.game);
+                GameState.readyCheck();
                 this.towerDrag.kill();
                 this.towerButton.kill();
             }
@@ -175,9 +174,6 @@ export class GameState extends State {
     undo() {
         console.log(store.undo);
         if (store.undo.length > 0) {
-            if (store.readyButton) {
-                store.readyButton.destroy();
-            }
             const obj = store.undo.pop();
             switch (obj.type) {
                 case 'tower':
@@ -238,7 +234,7 @@ export class GameState extends State {
             socket.emit('we_have_a_winner', {gameId: store.gameId});
             const winner = this.add.text(this.game.world.centerX, this.game.world.centerY, lang[store.selectedLang].WIN, {
                 fill: '#000000',
-                font: 'bold 32px Almendra'
+                font: 'bold 16px Press Start 2P'
             });
             winner.anchor.setTo(0.5);
             this.game.paused = true;
@@ -259,9 +255,9 @@ export class GameState extends State {
         store.allies.forEach(caracter => caracter.selected = false);
     }
 
-    static readyCheck(game) {
+    static readyCheck() {
         if (store.wallCount > 13 && i > 5 && j > 2) {
-            store.readyButton = game.add.button(416, 768, 'ready', readyAction);
+            emitter.emit('event:ready');
         }
     }
 }

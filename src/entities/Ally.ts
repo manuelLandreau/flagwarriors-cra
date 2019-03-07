@@ -7,8 +7,6 @@ import {lang} from '../config/lang';
 import {socket} from '../utils/socket-handler';
 import {walkAnimation, fightAnimation, swordSound} from '../utils/animation.helper';
 
-const {gameId} = store;
-
 /**
  * Ally class.
  */
@@ -98,7 +96,7 @@ export class Ally extends Warrior {
                                 nextx: path[1].x * 32,
                                 nexty: path[1].y * 16,
                                 name: this.name,
-                                gameId
+                                gameId: store.gameId
                             });
                             // map.caracterObstacle(this.pathx, this.pathy, 0);
                         }
@@ -120,17 +118,16 @@ export class Ally extends Warrior {
                     socket.emit('attack', {
                         name: ennemy.name,
                         damage: game.rnd.integerInRange(2, 6),
-                        gameId: gameId
+                        gameId: store.gameId
                     });
                     fightAnimation(this, ennemy);
                     swordSound(store.sword1, store.sword2, store.pare);
-                    console.log('fight');
                 }
             });
         });
 
         this.events.onKilled.add(() => {
-            socket.emit('death', {name: this.name, gameId});
+            socket.emit('death', {name: this.name, gameId: store.gameId});
             const skeleton = game.add.sprite(this.x, this.y, 'skeleton');
             skeleton.anchor.setTo(0.5, 0.5);
             store.all.add(skeleton);
@@ -150,13 +147,13 @@ export class Ally extends Warrior {
 
     getFlag() {
         if (this.game && this.game.physics.arcade.distanceBetween(this, store.theirFlag) < 32) {
-            socket.emit('got_flag', {name: this.name, gameId});
+            socket.emit('got_flag', {name: this.name, gameId: store.gameId});
             store.theirFlag.x = this.x;
             store.theirFlag.y = this.y - 24;
         }
     }
 
-    // Damge is a native method from phaser
+    // Damge is a native method from phasergameId
     giveDamage(lp) {
         this.health -= lp;
         if (this.health < 0) {
@@ -164,31 +161,15 @@ export class Ally extends Warrior {
                 store.deadWarior++;
             }
             this.kill();
-            socket.emit('death', {name: this.name, gameId});
+            socket.emit('death', {name: this.name, gameId: store.gameId});
             if (store.deadWarior > 5) {
-                socket.emit('we_have_a_looser', {gameId});
+                socket.emit('we_have_a_looser', {gameId: store.gameId});
                 const looser = this.game.add.text(this.game.world.centerX, this.game.world.centerY, lang[store.selectedLang].LOOSE, {
                     fill: '#000000',
-                    font: 'bold 32px Almendra'
+                    font: 'bold 16px Press Start 2P'
                 });
                 looser.anchor.setTo(0.5);
-                // if (logged) {
-                //     var body = {
-                //         token: window.localStorage.getItem('jtw'),
-                //         victory: false,
-                //         defeat: true
-                //     };
-                //     $.ajax({
-                //         url: '/update_ratio',
-                //         type: 'PUT',
-                //         data: body,
-                //         success: function (data) {
-                //             user_infos = data.infos;
-                //         },
-                //         error: function (err) {
-                //         }
-                //     });
-                // }
+
                 this.game.paused = true;
             }
         }

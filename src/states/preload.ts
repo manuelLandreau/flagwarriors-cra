@@ -1,64 +1,46 @@
+import WebFont from 'webfont';
 import {State} from '../interfaces/state';
+import warrior from '../assets/sprites/warriors.png';
+import blueWarrior from '../assets/sprites/blueWarriors.png';
+import flags from '../assets/sprites/flags.png';
+import skeleton from '../assets/sprites/skeleton.png';
+import kaboom from '../assets/sprites/explode.png';
+import walle from '../assets/sprites/wall2.png';
+import tile from '../assets/sprites/empty.png';
+import tower from '../assets/sprites/tower.png';
+import arrow from '../assets/sprites/arrow.png';
+import background from '../assets/sprites/bg.png';
+import paper from '../assets/sprites/paper.png';
+import start from '../assets/sprites/start.png';
+import ready from '../assets/sprites/contour.png';
+import undo from '../assets/sprites/undo.png';
+import grid from '../assets/sprites/grid.png';
 
 /**
  * State to load all game resources.
  */
 export class PreloadState extends State {
+
     loadText;
+    ready = false;
+    fontsReady = false;
 
     create() {
-        this.game.physics.startSystem(Phaser.Physics.ARCADE);
-
-        // Transistion plugin
-        // this.game.stateTransition = this.game.plugins.add(Phaser.Plugin.StateTransition);
-        // this.game.stateTransition.configure({
-        //     duration: Phaser.Timer.SECOND * 0.8,
-        //     ease: Phaser.Easing.Exponential.InOut,
-        //     properties: {
-        //         alpha: 0,
-        //         scale: {
-        //             x: 1.4,
-        //             y: 1.4
-        //         }
-        //     }
-        // });
-
-        this.loadText = this.add.text(this.game.world.centerX / 2, this.game.world.centerY, 'Chargement...', {fill: '#ffffff'});
+        this.loadText = this.add.text(
+            this.game.world.centerX / 3,
+            this.game.world.centerY, 'Chargement...',
+            {fill: '#ffffff', font: 'Press Start 2P', fontSize: 22}
+        );
         this.load.onFileComplete.add(this.fileComplete, this);
         this.load.onLoadComplete.add(this.loadComplete, this);
 
-        this.startLoad();
+        this.loadResources();
     }
 
-    startLoad() {
-
-        this.load.spritesheet('warrior', './assets/warrior.png', 32, 32, 40);
-        this.load.spritesheet('blueWarrior', './assets/blueWarriors.png', 32, 32, 40);
-        this.load.spritesheet('flags', './assets/flags.png', 16, 16);
-        this.load.spritesheet('skeleton', './assets/skeleton.png', 32, 32);
-        this.load.spritesheet('kaboom', './assets/explode.png', 128, 128);
-        this.load.spritesheet('sound', './assets/sound.png', 32, 32);
-        this.load.image('walle', './assets/wall2.png');
-        this.load.image('tile', './assets/empty.png');
-        this.load.image('tower', './assets/tower.png');
-        this.load.image('arrow', './assets/arrow.png');
-        this.load.image('background', './assets/bg.png');
-        this.load.image('paper', './assets/paper.png');
-        this.load.image('start', './assets/start.png');
-        this.load.image('ready', './assets/contour.png');
-        this.load.image('undo', './assets/undo.png');
-        this.load.image('grid', './assets/grid.png');
-        this.load.image('logout', './assets/logout.png');
-        // this.load.audio('ambiance', './assets/ambiance.mp3');
-        // this.load.audio('start', './assets/start.mp3');
-        // this.load.audio('canon', './assets/canon.mp3');
-        // this.load.audio('explosion', './assets/explosion.mp3');
-        // this.load.audio('sword1', './assets/sword1.mp3');
-        // this.load.audio('sword2', './assets/sword2.mp3');
-        // this.load.audio('pare', './assets/pare.mp3');
-
-
-        this.load.start();
+    update() {
+        if (this.ready && this.fontsReady) {
+            this.game.state.start('Pregame');
+        }
     }
 
     fileComplete(progress) {
@@ -66,6 +48,41 @@ export class PreloadState extends State {
     }
 
     loadComplete() {
-        this.game.state.start('Pregame');
+        this.ready = true;
+    }
+
+    loadResources() {
+        this.load.spritesheet('warrior', warrior, 32, 32, 40);
+        this.load.spritesheet('blueWarrior', blueWarrior, 32, 32, 40);
+        this.load.spritesheet('flags', flags, 16, 16);
+        this.load.spritesheet('skeleton', skeleton, 32, 32);
+        this.load.spritesheet('kaboom', kaboom, 128, 128);
+        this.load.image('walle', walle);
+        this.load.image('tile', tile);
+        this.load.image('tower', tower);
+        this.load.image('arrow', arrow);
+        this.load.image('background', background);
+        this.load.image('paper', paper);
+        this.load.image('start', start);
+        this.load.image('ready', ready);
+        this.load.image('undo', undo);
+        this.load.image('grid', grid);
+        // this.load.audio('ambiance', './assets/ambiance.mp3');
+        // this.load.audio('start', './assets/start.mp3');
+        // this.load.audio('canon', './assets/canon.mp3');
+        // this.load.audio('explosion', './assets/explosion.mp3');
+        // this.load.audio('sword1', './assets/sword1.mp3');
+        // this.load.audio('sword2', './assets/sword2.mp3');.bind(this
+        // this.load.audio('pare', './assets/pare.mp3');
+
+        const WebFontConfig = {
+            active: () => this.fontsReady = true, // The bind(this) ensures that the method will be used with your Phaser Game as context
+            google: {
+                families: ['Press Start 2P']
+            }
+        };
+        this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js', WebFontConfig.active, this);
+
+        this.load.start();
     }
 }

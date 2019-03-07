@@ -5,16 +5,16 @@ import {Group} from 'phaser';
 import {store} from '../config/store';
 import {Ennemy} from '../entities/Ennemy';
 import {Tower} from '../entities/Tower';
+import {emitter} from './EventEmitter';
 
 // export const socket = io('https://flagwarriors.herokuapp.com');
 export const socket = io(process.env.NODE_ENV === 'development' ? 'http://localhost:9000' : 'https://fl-server.herokuapp.com');
 
 let ennemyData;
 
-export function readyAction(readyButton) {
+export function readyAction() {
     store.readySwitch = true;
     store.tileGroup.removeAll();
-    readyButton.destroy();
     store.undoButton.destroy();
     socket.emit('ready', {
             warriors: [
@@ -38,18 +38,11 @@ export function readyAction(readyButton) {
     } else {
         store.waitText1 = game.add.text(game.world.centerX, game.world.centerY - 32, lang[store.selectedLang].WAITING_READY, {
             fill: '#000000',
-            font: 'bold 32px Almendra'
+            font: 'bold 16px Press Start 2P'
         });
         store.waitText1.anchor.setTo(0.5);
     }
 }
-
-socket.on('ready', data => {
-    ennemyData = data;
-    if (store.readySwitch) {
-        startGame();
-    }
-});
 
 function startGame() {
     addEnnemies(ennemyData);
@@ -63,7 +56,6 @@ function startGame() {
 
 export function addEnnemies(data) {
     store.undoButton.destroy();
-    store.readyButton.destroy();
     data.warriors.forEach(function (warrior) {
         store['ennemy' + warrior.name] = new Ennemy(game, 480 - warrior.x, 800 - warrior.y, warrior.name);
         store.ennemies.push(store['ennemy' + warrior.name]);
@@ -103,58 +95,46 @@ export function addEnnemies(data) {
         store.ourFlag.y = store['ennemy' + d.name].y - 24;
     });
 
-    socket.on('death', d => store['ennemy' + d.name].kill());
-
     socket.on('we_have_a_winner', () => {
         const looser = game.add.text(game.world.centerX, game.world.centerY, lang[store.selectedLang].LOOSE, {
             fill: '#000000',
-            font: 'bold 32px Almendra'
+            font: 'bold 16px Press Start 2P'
         });
         looser.anchor.setTo(0.5);
-        // if (store.logged) {
-        //     const body = {
-        //         token: window.localStorage.getItem('jtw'),
-        //         victory: false,
-        //         defeat: true
-        //     };
-        // $.ajax({
-        //     url: '/update_ratio',
-        //     type: 'PUT',
-        //     data: body,
-        //     success: function (data) {
-        //         // store.user_infos = data.infos;
-        //     },
-        //     error: function (err) {
-        //     }
-        // });
-        // }
-        game.paused = true;
 
+        game.paused = true;
     });
 
     socket.on('we_have_a_looser', () => {
         const winner = game.add.text(game.world.centerX, game.world.centerY, lang[store.selectedLang].WIN, {
             fill: '#000000',
-            font: 'bold 32px Almendra'
+            font: 'bold 16px Press Start 2P'
         });
         winner.anchor.setTo(0.5);
-        // if (store.logged) {
-        //     const body = {
-        //         token: window.localStorage.getItem('jtw'),
-        //         victory: false,
-        //         defeat: true
-        //     };
-        // $.ajax({
-        //     url: '/update_ratio',
-        //     type: 'PUT',
-        //     data: body,
-        //     success: function (data) {
-        //         // user_infos = data.infos;
-        //     },
-        //     error: function (err) {
-        //     }
-        // });
-        // }
+
         game.paused = true;
     });
 }
+
+// Observable to match with game.ts & GamePage.tsx state
+socket.on('game_on', () => {
+    socket.emit('game_on_last', {gameId: store.gameId});
+    emitter.emit('event:player_on');
+});
+
+socket.on('game_on_last', () => {
+    emitter.emit('event:player_on');
+});
+
+socket.on('death', d => {
+    store['ennemy' + d.name].kill();
+    emitter.emit('event:dead_warrior');
+});
+
+socket.on('ready', data => {
+    ennemyData = data;
+    if (store.readySwitch) {
+        startGame();
+    }
+    emitter.emit('event:ready');
+});

@@ -4,9 +4,10 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 // @ts-ignore
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import * as serviceWorker from './sw';
+
 import Home from './Pages/Home';
-import './styles.css';
-import './sw.ts';
+import './assets/css/styles.css';
 
 import GamePage from './Pages/GamePage';
 import Languages from './Pages/Languages';
@@ -34,3 +35,5 @@ class App extends React.Component {
 
 // @ts-ignore
 ReactDOM.render(<App/>, document.getElementById('root'));
+
+serviceWorker.unregister();
