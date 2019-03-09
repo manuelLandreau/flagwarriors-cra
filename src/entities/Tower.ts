@@ -10,7 +10,6 @@ export class Tower extends Warrior {
 
     ennemies;
     arrowAttack;
-    name: string;
 
     constructor(game: Game,
                 x: number,

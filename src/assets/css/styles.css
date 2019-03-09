@@ -13,7 +13,7 @@ a:hover, a:focus {
     text-decoration: none;
 }
 
-[type="text"] {
+[type="text"], [type="submit"] {
     -webkit-box-shadow: 0 0 0 0 #333 inset;
     box-shadow: 0 0 0 0 #333 inset;
 }

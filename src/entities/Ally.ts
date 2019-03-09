@@ -20,7 +20,6 @@ export class Ally extends Warrior {
     path: any;
     move: any;
     attack: any;
-    name: string;
 
     constructor(game: Game,
                 x: number,
@@ -42,7 +41,7 @@ export class Ally extends Warrior {
         this.path = new EasyStar();
         this.path.setAcceptableTiles([0]);
         this.path.setIterationsPerCalculation(1000);
-        this.health = 100;
+        this.health = 150;
         this.name = name;
 
         // Groups

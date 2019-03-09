@@ -17,7 +17,6 @@ export class Ennemy extends Warrior {
     path;
     move;
     attack;
-    name: string;
 
     constructor(game: Game,
                 x: number,
@@ -36,7 +35,7 @@ export class Ennemy extends Warrior {
         this.path = new EasyStar();
         this.path.setAcceptableTiles([0]);
         this.path.setIterationsPerCalculation(1000);
-        this.health = 100;
+        this.health = 150;
         this.animations.add('iddle', [0]);
         this.animations.add('south', [0, 1, 2, 3, 4]);
         this.animations.add('north', [5, 6, 7, 8, 9]);

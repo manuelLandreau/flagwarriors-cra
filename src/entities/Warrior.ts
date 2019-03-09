@@ -5,6 +5,8 @@ import Game from '../Game';
  */
 export abstract class Warrior extends Phaser.Sprite {
 
+    name: string;
+
     protected constructor(game: Game,
                           x: number,
                           y: number,

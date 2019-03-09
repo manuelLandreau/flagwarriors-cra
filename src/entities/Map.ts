@@ -1,6 +1,7 @@
 import {Group} from 'phaser';
 import {store} from '../config/store';
 import {GameState} from '../states/game';
+import {emitter} from '../utils/EventEmitter';
 
 /**
  * Map
@@ -76,5 +77,10 @@ export class Map {
                 }
             }
         }));
+
+        if (store.undo.length === 1) {
+            emitter.emit('event:is_undo_disabled', false);
+        }
+
     }
 }

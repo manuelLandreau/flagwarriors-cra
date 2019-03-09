@@ -138,7 +138,7 @@
 .rcw-conversation-container {
     position: absolute;
     bottom: 4vh;
-    width: calc(0.6 * 94vh);
+    width: calc(0.6 * 93vh);
     -webkit-animation-duration: .5s;
     -webkit-animation-name: c;
     -webkit-animation-fill-mode: forwards;

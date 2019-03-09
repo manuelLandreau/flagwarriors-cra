@@ -15,7 +15,6 @@ let ennemyData;
 export function readyAction() {
     store.readySwitch = true;
     store.tileGroup.removeAll();
-    store.undoButton.destroy();
     socket.emit('ready', {
             warriors: [
                 {x: store.caracter1.x, y: store.caracter1.y, name: '1'},
@@ -55,7 +54,6 @@ function startGame() {
 }
 
 export function addEnnemies(data) {
-    store.undoButton.destroy();
     data.warriors.forEach(function (warrior) {
         store['ennemy' + warrior.name] = new Ennemy(game, 480 - warrior.x, 800 - warrior.y, warrior.name);
         store.ennemies.push(store['ennemy' + warrior.name]);

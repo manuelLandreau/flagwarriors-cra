@@ -94,7 +94,9 @@ export class GameState extends State {
         this.towerDrag.events.onDragStop.add(this.addTower, this);
 
         // Undo button handleler
-        store.undoButton = this.add.button(350, 770, 'undo', this.undo, this);
+        emitter.subscribe('event:undo', () => {
+            this.undo()
+        });
     }
 
     addWarrior(pointer) {
@@ -123,6 +125,10 @@ export class GameState extends State {
         }
 
         store.tileGroup.forEach(tile => tile.alpha = 0);
+
+        if (store.undo.length === 1) {
+            emitter.emit('event:is_undo_disabled', false);
+        }
     }
 
     addTower(pointer) {
@@ -153,6 +159,10 @@ export class GameState extends State {
         }
 
         store.tileGroup.forEach(tile => tile.alpha = 0);
+
+        if (store.undo.length === 1) {
+            emitter.emit('event:is_undo_disabled', false);
+        }
     }
 
     wallAction(_, __, val = null) {
@@ -173,7 +183,6 @@ export class GameState extends State {
     }
 
     undo() {
-        console.log(store.undo);
         if (store.undo.length > 0) {
             const obj = store.undo.pop();
             switch (obj.type) {
@@ -211,6 +220,9 @@ export class GameState extends State {
                     i--;
                     break;
             }
+        }
+        if (store.undo.length < 1) {
+            emitter.emit('event:is_undo_disabled', true);
         }
     }
 
