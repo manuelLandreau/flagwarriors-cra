@@ -19,8 +19,8 @@ export default function Home() {
                     {lang[store.selectedLang].CREATE_JOIN}
                 </Link>
             </section>
-            <footer className="icon-list p-absolute" style={{bottom: 10, right: 10}}>
-                <a href="https://github.com/manuellandreau/flagwarriors-cra">
+            <footer className="icon-list p-absolute" style={{bottom: 20, width: '100%'}}>
+                <a href="https://github.com/manuellandreau/flagwarriors-cra" className="txtcenter" target="blank">
                     <i className="nes-icon github is-large"/>
                 </a>
                 <div className="clear"/>

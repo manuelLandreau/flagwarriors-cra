@@ -3,6 +3,7 @@ import * as React from 'react';
 import {store} from '../config/store';
 import {readyAction} from '../utils/socket-handler';
 import {emitter} from '../utils/EventEmitter';
+import HelpModal from '../components/HelpModal';
 
 export default function BottomBar() {
     const [lifePoints, setLifePoints] = React.useState([1, 2, 3, 4, 5]);
@@ -11,6 +12,7 @@ export default function BottomBar() {
     const [isReadyDisabled, setIsReadyDisabled] = React.useState(false);
     const [isButtonsHidden, setIsButtonsHidden] = React.useState(false);
     const [isUndoDisabled, setIsUndoDisabled] = React.useState(true);
+    const [isOpen, setIsOpen] = React.useState(true);
 
     emitter.subscribe('event:player_on', () => {
         setPlayerOn(true)
@@ -31,6 +33,10 @@ export default function BottomBar() {
     emitter.subscribe('event:is_undo_disabled', val => {
         setIsUndoDisabled(val)
     });
+
+    function toggleHelpModal() {
+        setIsOpen(!isOpen)
+    }
 
     function onReady() {
         readyAction();
@@ -57,6 +63,8 @@ export default function BottomBar() {
                         onClick={onUndo} disabled={isUndoDisabled} hidden={isButtonsHidden}>
                     <span style={{fontSize: 42, lineHeight: 0.15}}>&#8630;</span>
                 </button>
+                <button className={`nes-btn is-primary fr`} onClick={toggleHelpModal} hidden={isButtonsHidden}>?</button>
+                <HelpModal isOpen={isOpen} toggle={toggleHelpModal}/>
             </div>
         )
     } else {

@@ -24,7 +24,7 @@ export default function ({children}) {
                 <div className="clear"/>
             </header>
 
-            <div className="mtl mbm txtcenter">
+            <div className="mtl mbm pas txtcenter">
                 <img src={fw} alt=""/>
             </div>
 

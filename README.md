@@ -9,7 +9,7 @@ Remake from the [2016 version](https://github.com/manuelLandreau/flagwarriors)
 
 For now it's a mess, some help would be nice ;)
 
-Demo [here](https://relaxed-beaver-a7b6ef.netlify.com)
+Demo [here](https://flagwarriors.netlify.com)
 
 ## Features: 
 * phaser 2.x

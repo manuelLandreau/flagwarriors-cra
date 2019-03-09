@@ -72,8 +72,10 @@ export class GameState extends State {
         // Buttons
         this.warriorButton = this.add.image(-16, 772, 'warrior');
         this.warriorButton.scale.setTo(2);
-        store.wallButton = this.add.button(49, 772, 'walle', this.wallAction);
-        this.towerButton = this.add.image(96, 772, 'tower');
+
+        this.towerButton = this.add.image(48, 772, 'tower');
+
+        store.wallButton = this.add.button(96, 772, 'walle', this.wallAction);
 
         // Drag buttons
         this.warriorDrag = this.add.image(16, 804, 'warrior');
@@ -85,7 +87,7 @@ export class GameState extends State {
         this.warriorDrag.events.onDragUpdate.add(GameState.onDragSprite);
         this.warriorDrag.events.onDragStop.add(this.addWarrior, this);
 
-        this.towerDrag = this.add.image(120, 812, 'tower');
+        this.towerDrag = this.add.image(72, 812, 'tower');
         this.towerDrag.anchor.setTo(0.5, 0.5);
         this.towerDrag.inputEnabled = true;
         this.towerDrag.input.enableDrag();
@@ -110,19 +112,16 @@ export class GameState extends State {
             store.all.sort('y', Group.SORT_ASCENDING);
             store.undo.push({type: 'caracter', name: i});
             i++;
-            this.warriorDrag.x = 16;
-            this.warriorDrag.y = 804;
-            this.warriorDrag.tint = '0xFFFFFF';
             if (i === 6) {
                 this.warriorDrag.kill();
                 this.warriorButton.kill();
                 GameState.readyCheck();
             }
-        } else {
-            this.warriorDrag.x = 16;
-            this.warriorDrag.y = 804;
-            this.warriorDrag.tint = '0xFFFFFF';
         }
+
+        this.warriorDrag.x = 16;
+        this.warriorDrag.y = 804;
+        this.warriorDrag.tint = '0xFFFFFF';
 
         store.tileGroup.forEach(tile => tile.alpha = 0);
 
@@ -144,19 +143,17 @@ export class GameState extends State {
             store.map.setObstacle(Math.round(pointer.x / 32) * 32, Math.round(pointer.y / 32) * 32);
             store.undo.push({type: 'tower', name: j});
             j++;
-            this.towerDrag.x = 120;
-            this.towerDrag.y = 812;
-            this.towerDrag.tint = '0xFFFFFF';
+
             if (j === 3) {
                 GameState.readyCheck();
                 this.towerDrag.kill();
                 this.towerButton.kill();
             }
-        } else {
-            this.towerDrag.x = 120;
-            this.towerDrag.y = 812;
-            this.towerDrag.tint = '0xFFFFFF';
         }
+
+        this.towerDrag.x = 72;
+        this.towerDrag.y = 812;
+        this.towerDrag.tint = '0xFFFFFF';
 
         store.tileGroup.forEach(tile => tile.alpha = 0);
 
