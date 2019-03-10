@@ -60,8 +60,9 @@ export default function BottomBar() {
                               disabled={!isReadyDisabled} onClick={onReady} hidden={isButtonsHidden}>Ready</button>
                 }
                 <button className={`nes-btn ${isUndoDisabled ? 'is-disabled' : ''} fr`}
+                        style={{fontSize: 42, lineHeight: '30px', paddingTop: 0}}
                         onClick={onUndo} disabled={isUndoDisabled} hidden={isButtonsHidden}>
-                    <span style={{fontSize: 42, lineHeight: 0.15}}>&#8630;</span>
+                    &#8630;
                 </button>
                 <button className={`nes-btn is-primary fr`} onClick={toggleHelpModal} hidden={isButtonsHidden}>?</button>
                 <HelpModal isOpen={isOpen} toggle={toggleHelpModal}/>
