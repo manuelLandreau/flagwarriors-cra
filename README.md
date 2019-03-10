@@ -17,12 +17,13 @@ Demo [here](https://flagwarriors.netlify.com)
 * Wrapped in [Create React App](https://github.com/facebookincubator/create-react-app).
 * socket.io (multi player 2p)
 * Chat integretion
+* Create game and join system (in progress)
 * ...
 
 ## TODO : 
-* Create game and join system (in progress)
 * Better assets
-* Tests and some clean up
+* Tests
+* Some clean up
 * ...
 
 run game :
