@@ -31,7 +31,6 @@
 }
 
 .rcw-full-screen .rcw-header {
-    -ms-flex-negative: 0;
     flex-shrink: 0;
     position: relative
 }
@@ -54,35 +53,9 @@
     height: 20px
 }
 
-@media screen and (max-width: 800px) {
-    .rcw-conversation-container .rcw-header {
-        -ms-flex-negative: 0;
-        flex-shrink: 0;
-        position: relative
-    }
-
-    .rcw-conversation-container .rcw-title {
-        padding: 0 0 15px
-    }
-
-    .rcw-conversation-container .rcw-close-button {
-        background-color: #35cce6;
-        display: block;
-        position: absolute;
-        right: 10px;
-        top: 20px;
-        width: 40px
-    }
-
-    .rcw-conversation-container .rcw-close {
-        width: 20px;
-        height: 20px
-    }
-}
-
 .rcw-messages-container {
     background-color: #fff;
-    height: 74vh;
+    height: 69vh;
     overflow-y: scroll;
     padding-top: 10px
 }
@@ -90,13 +63,6 @@
 .rcw-full-screen .rcw-messages-container {
     height: 100%;
     max-height: none
-}
-
-@media screen and (max-width: 800px) {
-    .rcw-messages-container {
-        height: 100%;
-        max-height: none
-    }
 }
 
 .rcw-sender {
@@ -128,17 +94,11 @@
     height: 25px
 }
 
-@media screen and (max-width: 800px) {
-    .rcw-sender {
-        -ms-flex-negative: 0;
-        flex-shrink: 0
-    }
-}
-
 .rcw-conversation-container {
     position: absolute;
-    bottom: 4vh;
+    top: -95vh;
     width: calc(0.6 * 93vh);
+    height: 93vh;
     -webkit-animation-duration: .5s;
     -webkit-animation-name: c;
     -webkit-animation-fill-mode: forwards;
@@ -151,15 +111,12 @@
 }
 
 .rcw-slide-out {
-    -webkit-animation-delay: 0;
     -webkit-animation-duration: .5s;
     -webkit-animation-name: d;
     -webkit-animation-fill-mode: forwards;
-    -moz-animation-delay: 0;
     -moz-animation-duration: .5s;
     -moz-animation-name: d;
     -moz-animation-fill-mode: forwards;
-    animation-delay: 0;
     animation-duration: .5s;
     animation-name: d;
     animation-fill-mode: forwards
@@ -171,16 +128,6 @@
     -ms-flex-direction: column;
     flex-direction: column;
     height: 100%
-}
-
-@media screen and (max-width: 800px) {
-    .rcw-conversation-container {
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        height: 100%
-    }
 }
 
 .rcw-launcher .rcw-badge {
@@ -196,19 +143,15 @@
 }
 
 .rcw-launcher {
-    -webkit-animation-delay: 0;
     -webkit-animation-duration: .5s;
     -webkit-animation-name: c;
     -webkit-animation-fill-mode: forwards;
-    -moz-animation-delay: 0;
     -moz-animation-duration: .5s;
     -moz-animation-name: c;
     -moz-animation-fill-mode: forwards;
-    animation-delay: 0;
     animation-duration: .5s;
     animation-name: c;
     animation-fill-mode: forwards;
-    -ms-flex-item-align: end;
     align-self: flex-end;
     background-color: #35cce6;
     height: 60px;
@@ -221,15 +164,12 @@
 }
 
 .rcw-open-launcher {
-    -webkit-animation-delay: 0;
     -webkit-animation-duration: .5s;
     -webkit-animation-name: b;
     -webkit-animation-fill-mode: forwards;
-    -moz-animation-delay: 0;
     -moz-animation-duration: .5s;
     -moz-animation-name: b;
     -moz-animation-fill-mode: forwards;
-    animation-delay: 0;
     animation-duration: .5s;
     animation-name: b;
     animation-fill-mode: forwards
@@ -237,31 +177,15 @@
 
 .rcw-close-launcher {
     width: 20px;
-    -webkit-animation-delay: 0;
     -webkit-animation-duration: .5s;
     -webkit-animation-name: a;
     -webkit-animation-fill-mode: forwards;
-    -moz-animation-delay: 0;
     -moz-animation-duration: .5s;
     -moz-animation-name: a;
     -moz-animation-fill-mode: forwards;
-    animation-delay: 0;
     animation-duration: .5s;
     animation-name: a;
     animation-fill-mode: forwards
-}
-
-@media screen and (max-width: 800px) {
-    .rcw-launcher {
-        bottom: 0;
-        margin: 20px;
-        position: fixed;
-        right: 0
-    }
-
-    .rcw-hide-sm {
-        display: none
-    }
 }
 
 @keyframes a {

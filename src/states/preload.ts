@@ -1,4 +1,3 @@
-import WebFont from 'webfont';
 import {State} from '../interfaces/state';
 import warrior from '../assets/sprites/warriors.png';
 import blueWarrior from '../assets/sprites/blueWarriors.png';
@@ -11,9 +10,16 @@ import tower from '../assets/sprites/tower.png';
 import arrow from '../assets/sprites/arrow.png';
 import background from '../assets/sprites/bg.png';
 import paper from '../assets/sprites/paper.png';
-import start from '../assets/sprites/start.png';
 import undo from '../assets/sprites/undo.png';
 import grid from '../assets/sprites/grid.png';
+
+// import ambiance from '../assets/sound/ambiance.mp3';
+// import start from '../assets/sound/start.mp3';
+// import canon from '../assets/sound/canon.mp3';
+// import explosion from '../assets/sound/explosion.mp3';
+// import sword1 from '../assets/sound/sword1.mp3';
+// import sword2 from '../assets/sound/sword2.mp3';
+// import pare from '../assets/sound/pare.mp3';
 
 /**
  * State to load all game resources.
@@ -62,16 +68,15 @@ export class PreloadState extends State {
         this.load.image('arrow', arrow);
         this.load.image('background', background);
         this.load.image('paper', paper);
-        this.load.image('start', start);
         this.load.image('undo', undo);
         this.load.image('grid', grid);
-        // this.load.audio('ambiance', './assets/ambiance.mp3');
-        // this.load.audio('start', './assets/start.mp3');
-        // this.load.audio('canon', './assets/canon.mp3');
-        // this.load.audio('explosion', './assets/explosion.mp3');
-        // this.load.audio('sword1', './assets/sword1.mp3');
-        // this.load.audio('sword2', './assets/sword2.mp3');.bind(this
-        // this.load.audio('pare', './assets/pare.mp3');
+        this.load.audio('ambiance', './sounds/ambiance.mp3');
+        this.load.audio('start', './sounds/start.mp3');
+        this.load.audio('canon', './sounds/canon.mp3');
+        this.load.audio('explosion', './sounds/explosion.mp3');
+        this.load.audio('sword1', './sounds/sword1.mp3');
+        this.load.audio('sword2', './sounds/sword2.mp3');
+        this.load.audio('pare', './sounds/pare.mp3');
 
         const WebFontConfig = {
             active: () => this.fontsReady = true, // The bind(this) ensures that the method will be used with your Phaser Game as context

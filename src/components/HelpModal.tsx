@@ -3,7 +3,7 @@ import help from '../assets/img/help.png';
 
 export default function HelpModal({isOpen, toggle}) {
     return (
-        <section className={isOpen ? 'p-absolute' : 'is-hidden'} style={{top: '-105vh'}}>
+        <section className={isOpen ? 'p-absolute' : 'is-hidden'} style={{top: '-113vh'}}>
                 <dialog className="nes-dialog" id="dialog-default" style={{width: 'calc(0.6 * 93vh)'}}>
                     <div className="mbm">
                         <h2 className="title">Help</h2>
