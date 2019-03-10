@@ -68,6 +68,6 @@ export default function BottomBar() {
             </div>
         )
     } else {
-        return <div/>
+        return <div>Waiting for an other player ...</div>
     }
 }
