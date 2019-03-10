@@ -3,7 +3,7 @@ import Game from '../Game';
 import {js as EasyStar} from 'easystarjs';
 import {Warrior} from './Warrior';
 import {store} from '../config/store';
-import {fightAnimation, swordSound, walkAnimation} from '../utils/animation.helper';
+import {fightAnimation, swordSound, walkAnimation} from '../utils/animationHandler';
 
 /**
  * Ennemy class.

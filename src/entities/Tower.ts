@@ -1,7 +1,7 @@
 import Game from '../Game';
 import {Warrior} from './Warrior';
 import {store} from '../config/store';
-import {socket} from '../utils/socket-handler';
+import {socket} from '../utils/socketHandler';
 
 /**
  * Tower class.

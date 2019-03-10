@@ -4,8 +4,8 @@ import {js as EasyStar} from 'easystarjs';
 import {Warrior} from './Warrior';
 import {store} from '../config/store';
 import {lang} from '../config/lang';
-import {socket} from '../utils/socket-handler';
-import {walkAnimation, fightAnimation, swordSound} from '../utils/animation.helper';
+import {socket} from '../utils/socketHandler';
+import {walkAnimation, fightAnimation, swordSound} from '../utils/animationHandler';
 
 /**
  * Ally class.

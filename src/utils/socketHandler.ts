@@ -7,10 +7,9 @@ import {Ennemy} from '../entities/Ennemy';
 import {Tower} from '../entities/Tower';
 import {emitter} from './EventEmitter';
 
-// export const socket = io('https://flagwarriors.herokuapp.com');
 export const socket = io(process.env.NODE_ENV === 'development' ? 'http://localhost:9000' : 'https://fl-server.herokuapp.com');
 
-let ennemyData;
+let ennemyDataTmp;
 
 export function readyAction() {
     store.readySwitch = true;
@@ -32,7 +31,7 @@ export function readyAction() {
         }
     );
 
-    if (ennemyData) {
+    if (ennemyDataTmp) {
         startGame();
     } else {
         store.waitText1 = game.add.text(game.world.centerX, game.world.centerY - 32, lang[store.selectedLang].WAITING_READY, {
@@ -44,7 +43,7 @@ export function readyAction() {
 }
 
 function startGame() {
-    addEnnemies(ennemyData);
+    addEnnemies(ennemyDataTmp);
 
     if (store.waitText1) {
         store.waitText1.destroy();
@@ -115,6 +114,12 @@ export function addEnnemies(data) {
 }
 
 // Observable to match with game.ts & GamePage.tsx state
+socket.on('game_id', data => {
+    console.log('Game ID: ', data.gameId);
+    store.gameId = data.gameId;
+    emitter.emit('event:good_to_go');
+});
+
 socket.on('game_on', () => {
     socket.emit('game_on_last', {gameId: store.gameId});
     emitter.emit('event:player_on');
@@ -130,7 +135,7 @@ socket.on('death', d => {
 });
 
 socket.on('ready', data => {
-    ennemyData = data;
+    ennemyDataTmp = data;
     if (store.readySwitch) {
         startGame();
     }

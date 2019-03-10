@@ -1,7 +1,7 @@
 import {State} from '../interfaces/state';
 import {store} from '../config/store';
 import {lang} from '../config/lang';
-import {socket} from '../utils/socket-handler';
+import {socket} from '../utils/socketHandler';
 import {emitter} from '../utils/EventEmitter';
 
 /**
@@ -21,15 +21,12 @@ export class PregameState extends State {
 
         waitText.anchor.setTo(0.5);
 
-        socket.on('game_id', data => {
-            console.log('Game ID: ', data.gameId);
-            store.gameId = data.gameId
-        });
-
         emitter.subscribe('event:player_on', () => {
             this.game.state.start('Game', true, false);
         });
 
-        socket.emit('avalable_player');
+        if (!store.createJoin) {
+            socket.emit('avalable_player');
+        }
     }
 }

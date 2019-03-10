@@ -4,13 +4,13 @@ import {Link} from 'react-router-dom';
 import {lang} from '../config/lang';
 import Layout from './Layout';
 
-export default function Languages(props) {
+export default function Languages({history}) {
 
     let selectedLang = store.selectedLang;
 
     function submitLang() {
         store.selectedLang = selectedLang;
-        props.history.push('/')
+        history.push('/')
     }
 
     return (

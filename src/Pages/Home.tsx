@@ -3,15 +3,24 @@ import {Link} from 'react-router-dom';
 import {store} from '../config/store';
 import {lang} from '../config/lang';
 import Layout from './Layout';
+import removeOldCanvas from '../utils/removeOldCanvas';
 
-export default function Home() {
+export default function Home({history}) {
+
+    // Hacky
+    removeOldCanvas();
+
+    function go() {
+        store.createJoin = false;
+        history.push('/game');
+    }
 
     return (
         <Layout>
             <section className="txtcenter">
-                <Link to="/game" className="nes-btn is-warning">
+                <a onClick={go} className="nes-btn is-warning">
                     {lang[store.selectedLang].PLAY_RANDOM}
-                </Link>
+                </a>
                 <div className="mtm mbm">
                     <small>{lang[store.selectedLang].OR}</small>
                 </div>

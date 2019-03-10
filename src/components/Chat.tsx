@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {addResponseMessage, Widget} from 'react-chat-widget';
 import '../assets/css/chat.css';
-import {socket} from '../utils/socket-handler';
+import {socket} from '../utils/socketHandler';
 import {store} from '../config/store';
 
 export default function Chat() {

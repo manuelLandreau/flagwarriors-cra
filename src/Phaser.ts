@@ -1,7 +1,7 @@
 // @ts-ignore
 window.PIXI = require('phaser/build/custom/pixi');
 // @ts-ignore
- import 'p2';
+import 'p2';
 // @ts-ignore
 window.Phaser = require('phaser/build/custom/phaser-split');
 

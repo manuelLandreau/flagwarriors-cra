@@ -1,7 +1,7 @@
 import Chat from '../components/Chat';
 import * as React from 'react';
 import {store} from '../config/store';
-import {readyAction} from '../utils/socket-handler';
+import {readyAction} from '../utils/socketHandler';
 import {emitter} from '../utils/EventEmitter';
 import HelpModal from '../components/HelpModal';
 

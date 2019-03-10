@@ -5,7 +5,7 @@ import {Group} from 'phaser';
 import {Tower} from '../entities/Tower';
 import {lang} from '../config/lang';
 import {store} from '../config/store';
-import {readyAction, socket} from '../utils/socket-handler';
+import {readyAction, socket} from '../utils/socketHandler';
 import {emitter} from '../utils/EventEmitter';
 
 // i for warriors, j for towers

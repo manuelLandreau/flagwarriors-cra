@@ -5,6 +5,7 @@ import BottomBar from '../components/BottomBar';
 export let game;
 
 export default function GamePage() {
+
     /**
      * Initialize game on page load.
      */

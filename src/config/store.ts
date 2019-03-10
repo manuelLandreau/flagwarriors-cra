@@ -1,5 +1,6 @@
 export const store = {
     selectedLang: 'fr',
+    createJoin: null,
     gameId: null,
     readyButton: null,
     gameOn: false,
