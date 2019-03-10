@@ -1,5 +1,5 @@
 export const store = {
-    selectedLang: 'fr',
+    selectedLang: 'en',
     createJoin: null,
     gameId: null,
     readyButton: null,
@@ -28,7 +28,7 @@ export const store = {
     theirFlag: null,
     ourFlag: null,
     deadWarior: 1,
-    sound: true,
+    sound: false,
     arrows: null,
     wallGroup: null,
     wallCount: null,
@@ -40,15 +40,9 @@ export const store = {
     sword1: null,
     sword2: null,
     pare: null,
-    button: null,
     loginButton: null,
     logoutButton: null,
     start: null,
     ambiance: null,
-    langButton: null,
-    soundFlag: true,
-    msg: '',
     waitText1: null,
-    logged: true,
-    displayChat: 'none'
 };
