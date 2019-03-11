@@ -23,7 +23,7 @@ Demo [here](https://flagwarriors.netlify.com)
 ## TODO : 
 * Better assets
 * Tests
-* S²ome clean up
+* Some clean up
 * ...
 
 run game :
