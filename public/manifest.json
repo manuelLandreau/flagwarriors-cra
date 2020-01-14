@@ -1,11 +1,16 @@
 {
-  "short_name": "FlagWarriors",
-  "name": "FlagWarriors game",
+  "name": "FlagWarriors",
+  "short_name": "fl",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "./img/icons/android-chrome-64x64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "./img/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
     }
   ],
   "start_url": "./index.html",
