@@ -1,5 +1,5 @@
 @import "~knacss/css/knacss-unminified.css";
-@import "~nes.css/css/nes.min.css";
+@import "./nes.min.css";
 
 html, body, h1, h2, h3, h4, h5, h6 {
     font-family: "Press Start 2P", sans-serif;
